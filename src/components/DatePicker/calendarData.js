@@ -50,14 +50,18 @@ export function getNameForWeek(week) {
 }
 
 function isLeapYear(year) {
-  if(year % 400 === 0) return 1
-  if(year % 100 === 0) return 0
-  if(year % 4 === 0) return 1
-  return 0
+  if(year % 400 === 0) return true
+  if(year % 100 === 0) return false
+  return year % 4 === 0;
+
 }
 
 export function getDaysInMonth(month, year) {
-  return lookupMonthDays[month] + isLeapYear(year)
+  const lookup = lookupMonthDays[month]
+  if(month === 1 && isLeapYear(year)) {
+    return lookup + 1
+  }
+  return lookup
 }
 
 export function addMonthDelta(month, year, delta) {
